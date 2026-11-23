@@ -350,5 +350,3 @@ Tests use mocks and do not require live API keys.
 - **News has no published upstream schema**: the internal `NewsItem`
   model follows the Job schema pattern, with a source, an ISO-8601
   publication timestamp, and article text.
-#   D a t a O r b i t  
- 
