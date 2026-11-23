@@ -1,0 +1,11 @@
+.env
+credentials.json
+__pycache__/
+*.pyc
+*.egg-info/
+.venv/
+.pytest_cache/
+data/raw/
+data/processed/
+*.log
+credentials.json

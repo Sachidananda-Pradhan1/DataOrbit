@@ -1,0 +1,44 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "graphone-pipeline"
+version = "0.1.0"
+description = "GraphOne / FrontierAtlas AI Engineer demo task — scalable ingestion pipeline for AI startups, products, papers, jobs and news"
+requires-python = ">=3.11"
+dependencies = [
+    "aiohttp>=3.9",
+    "httpx>=0.27",
+    "pydantic>=2.7",
+    "trafilatura>=1.6",
+    "beautifulsoup4>=4.12",
+    "dateparser>=1.2",
+    "feedparser>=6.0",
+    "gspread>=6.1",
+    "google-auth>=2.30",
+    "psycopg[binary]>=3.1",
+    "redis>=5.0",
+    "tenacity>=8.3",
+    "python-dotenv>=1.0",
+]
+
+[project.optional-dependencies]
+dev = ["pytest>=8.0", "ruff>=0.4"]
+playwright = ["playwright>=1.44"]
+llm = ["google-genai>=1.0", "groq>=0.9", "openai>=1.30"]  # openai: DeepSeek's OpenAI-compatible client
+
+[tool.setuptools.packages.find]
+where = ["."]
+include = ["src*"]
+
+[tool.ruff]
+line-length = 100
+
+[tool.ruff.lint]
+# BLE001: broad `except Exception` is deliberate — one failing URL/item
+# must never kill a batch crawl or a fallback chain (see fetcher.py,
+# jobs.py, news.py, papers.py, orchestrator.py).
+# UP017: `timezone.utc` is the repo-wide convention (matches base.py,
+# date_utils.py); `datetime.UTC` is equivalent, consistency wins.
+ignore = ["BLE001", "UP017"]
